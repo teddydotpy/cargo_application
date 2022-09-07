@@ -1,0 +1,6 @@
+*.stash
+*.o
+.vscode/
+*.pro
+moc_*.cpp
+moc_*.h
