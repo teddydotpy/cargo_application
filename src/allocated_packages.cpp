@@ -8,6 +8,9 @@ AllocatedMap::AllocatedMap(){
  
 AllocatedMap::~AllocatedMap(){
     // Hey wassup up there you good ??
+    for(auto palette: this->keys()){
+        delete this->value(palette);
+    }
 }
 
 void AllocatedMap::add_new(Package *container, int palette_id){

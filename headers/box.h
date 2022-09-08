@@ -8,21 +8,21 @@ class Box : public Package{
     public:
         Box();
         Box(Box &other);
-        Box(float length, float breadth, float height, float weight, int Id);
+        Box(int length, int breadth, int height, int weight, int Id);
         ~Box();
 
-        const float getLength();
-        const float getBreadth();
-        const float getHeight();
-        float setLength(float length);
-        float setBreadth(float breadth);
-        float setHeight(float height);
+        const int getLength();
+        const int getBreadth();
+        const int getHeight();
+        int setLength(int length);
+        int setBreadth(int breadth);
+        int setHeight(int height);
         const QChar getConainerType();
         float getVolume();
 
 
     private:
-        float length, breadth, height;
+        int length, breadth, height;
         QChar container_type;
 };
 

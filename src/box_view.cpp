@@ -25,10 +25,10 @@ void BoxView::setupMainWidget(){
     height_layout = new QHBoxLayout();
     weight_layout = new QHBoxLayout();
 
-    length = new  QDoubleSpinBox(this); 
-    breadth = new QDoubleSpinBox(this); 
-    height = new QDoubleSpinBox(this); 
-    weight = new QDoubleSpinBox(this); 
+    length = new  QSpinBox(this); 
+    breadth = new QSpinBox(this); 
+    height = new QSpinBox(this); 
+    weight = new QSpinBox(this); 
 
     main_label = new QLabel("Box Container", this, Qt::WindowFlags());
     length_label = new QLabel("Length", this, Qt::WindowFlags());
@@ -60,9 +60,9 @@ void BoxView::setupMainWidget(){
 
 void BoxView::clearBoxes(){
     emit newContainer(length->value(), breadth->value(), height->value(), weight->value());
-    length->setValue(0.0);
-    breadth->setValue(0.0);
-    height->setValue(0.0);
-    weight->setValue(0.0);
+    length->setValue(0);
+    breadth->setValue(0);
+    height->setValue(0);
+    weight->setValue(0);
     this->update();
 }

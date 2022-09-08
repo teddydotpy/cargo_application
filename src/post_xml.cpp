@@ -1,6 +1,7 @@
 #include "../headers/post_xml.h"
 #include "../headers/allocated_packages.h"
 
+#include <QXmlStreamWriter>
 #include <QPushButton>
 #include <QVBoxLayout>
 #include <QListWidget>
@@ -13,11 +14,13 @@
 PostXmlWidget::~PostXmlWidget(){
     delete top_layout;
     delete bottom_layout;
+    delete xml_output;
 }
 
 void PostXmlWidget::setupView(){
 
     packages = nullptr;
+    xml_output = new QString();
      
     main_layout = new QVBoxLayout(this);
     top_layout = new QVBoxLayout();
@@ -54,11 +57,15 @@ void PostXmlWidget::setupView(){
     connect(post_b, SIGNAL(clicked()), this, SLOT(sendXMl()));
     connect(serialize, SIGNAL(clicked()), this, SLOT(SerializeXml()));
     connect(deallocate, SIGNAL(clicked()), this, SLOT(handleDeallocation()));
+    connect(this, SIGNAL(updateXmlViewer()), this, SLOT(updateXml()));
 }
 
-void PostXmlWidget::updateXml(QString xmldata){
-    xml_view->setText(xmldata);
+void PostXmlWidget::updateXml(){
+    xml_view->clear();
+    xml_view->setText(*xml_output);
     xml_view->update();
+    delete xml_output;
+    xml_output = new QString();
 }
 
 void PostXmlWidget::handleDeallocation(){
@@ -70,17 +77,52 @@ void PostXmlWidget::sendXMl(){
 }
 
 void PostXmlWidget::SerializeXml(){
-
+    QString noPallets = QString::number(packages->count());
+    QXmlStreamWriter *strema = new QXmlStreamWriter(xml_output);
+    strema->setAutoFormatting(true);
+    strema->writeStartDocument();
+    strema->writeStartElement("Pallets");
+    strema->writeAttribute("NumberOfPallets", noPallets);
     if (packages != nullptr){
         for(auto palette: packages->keys()){
             int palette_volume = 0, palette_weight = 0;
+            strema->writeStartElement("Pallete");
 
             for(auto container: *packages->value(palette)){
                 palette_weight += container->getWeight();
                 palette_volume += container->getVolume();
             }
+
+            strema->writeAttribute("weight", QString::number(palette_weight));
+            strema->writeAttribute("volume", QString::number(palette_volume));
+            strema->writeAttribute("number", QString::number(palette));
+
+            for(auto container: *packages->value(palette)){
+                if (container->getDimensions()->length() == 2){
+                    strema->writeStartElement("Cylinder");
+                        strema->writeTextElement("code", container->getCode());
+                        strema->writeTextElement("weight", QString::number(container->getWeight()));
+                        strema->writeTextElement("height", QString::number(container->getDimensions()->at(1)));
+                        strema->writeTextElement("diameter", QString::number(container->getDimensions()->at(0)));
+                    strema->writeEndElement();
+                } else {
+                    strema->writeStartElement("Box");
+                        strema->writeTextElement("code", container->getCode());
+                        strema->writeTextElement("weight", QString::number(container->getWeight()));
+                        strema->writeTextElement("height", QString::number(container->getDimensions()->at(2)));
+                        strema->writeTextElement("length", QString::number(container->getDimensions()->at(0)));
+                        strema->writeTextElement("breadth", QString::number(container->getDimensions()->at(1)));
+                    strema->writeEndElement();
+                }
+                
+            }
+
+            strema->writeEndElement();
         }
     }
+    strema->writeEndElement();
+    strema->writeEndDocument();
+    emit updateXmlViewer();
 }
 
 void PostXmlWidget::recieveAllocatedPackages(AllocatedMap *map){

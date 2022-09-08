@@ -8,18 +8,18 @@ class Cylinder : public Package{
     public:
         Cylinder();
         Cylinder(Cylinder &other);
-        Cylinder(float diameter, float height, float weight, int Id);
+        Cylinder(int diameter, int height, int weight, int Id);
         ~Cylinder();
 
-        float getDiameter();
-        float getHeight();
-        float setDiameter(float Diameter);
-        float setHeight(float height);
+        int getDiameter();
+        int getHeight();
+        int setDiameter(int Diameter);
+        int setHeight(int height);
         QChar getContainerType();
         float getVolume();
 
     private:
-        float diameter, height;
+        int diameter, height;
         QChar container_type;
 };
 

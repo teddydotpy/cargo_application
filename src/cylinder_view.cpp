@@ -24,9 +24,9 @@ void CylinderView::setupMainWidget(){
     height_layout = new QHBoxLayout();
     weight_layout = new QHBoxLayout();
 
-    diameter = new QDoubleSpinBox(this); 
-    height = new QDoubleSpinBox(this); 
-    weight = new QDoubleSpinBox(this); 
+    diameter = new QSpinBox(this); 
+    height = new QSpinBox(this); 
+    weight = new QSpinBox(this); 
 
     main_label = new QLabel("Cylinder Container", this, Qt::WindowFlags());
     diameter_label = new QLabel("Diameter", this, Qt::WindowFlags());
@@ -53,8 +53,8 @@ void CylinderView::setupMainWidget(){
 
 void CylinderView::clearBoxes(){
     emit newContainer(diameter->value(), height->value(), weight->value());
-    diameter->setValue(0.0);
-    height->setValue(0.0);
-    weight->setValue(0.0);
+    diameter->setValue(0);
+    height->setValue(0);
+    weight->setValue(0);
     this->update();
 }

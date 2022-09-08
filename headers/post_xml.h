@@ -32,7 +32,8 @@ class PostXmlWidget : public QWidget{
         QPushButton *post_b, *deallocate, *serialize;
         QTextEdit *xml_view;
         QListWidget *allocated_view;  
-        QLabel *top_label, *bottom_label;   
+        QLabel *top_label, *bottom_label;
+        QString *xml_output;
 
         void setupView();
 
@@ -48,11 +49,12 @@ class PostXmlWidget : public QWidget{
 
     signals:
         void unallocatePackage(Package *cont, int pos);
+        void updateXmlViewer();
 
     public slots:
         void SerializeXml();
         void recieveAllocatedPackages(AllocatedMap *map);
-        void updateXml(QString xmldata);
+        void updateXml();
         void handleDeallocation();
         void sendXMl();
 

@@ -29,8 +29,8 @@ class ContainerWidget : public QWidget{
                 cylinder  = new CylinderView(this);
                 
                 setupViews();
-                connect(box, SIGNAL(newContainer(float, float, float, float)), this, SLOT(newPackage(float, float, float, float)));
-                connect(cylinder, SIGNAL(newContainer(float, float, float)), this, SLOT(newPackage(float, float, float)));
+                connect(box, SIGNAL(newContainer(int, int, int, int)), this, SLOT(newPackage(int, int, int, int)));
+                connect(cylinder, SIGNAL(newContainer(int, int, int)), this, SLOT(newPackage(int, int, int)));
                 connect(this, SIGNAL(newContainer(QString)), code_list, SLOT(update(QString)));
                 connect(code_list, SIGNAL(codeSelected(QString, int, int)), this, SLOT(paletteUpdate(QString, int, int)));
             };

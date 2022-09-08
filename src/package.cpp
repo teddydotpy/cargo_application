@@ -3,11 +3,13 @@
 #include <QString>
 #include <QChar>
 #include <QDateTime>
+#include <QList>
 
 Package::Package(){
     package_code = "";
     pallete = 0;
     weight = 0;
+    dimensions = new QList<int>();
 }
 
 Package::Package(const Package &other){
@@ -15,6 +17,7 @@ Package::Package(const Package &other){
     pallete = other.pallete;
     weight = other.weight;
     package_code = "";
+    dimensions = new QList<int>();
 }
 
 Package::Package(int Id_b, int weight_b){
@@ -22,11 +25,11 @@ Package::Package(int Id_b, int weight_b){
     weight = weight_b;
     package_code = "";
     pallete = 0;
-    weight = 0;
+    dimensions = new QList<int>();
 }
 
 Package::~Package(){
-
+    delete dimensions;
 }
 
 QString Package::getCode(){
@@ -83,4 +86,20 @@ float Package::getVolume(){
 void Package::setVolume(float volume_c){
     volume = volume_c;
 }
+
+QList<int> *Package::getDimensions(){
+    return dimensions;
+}
+
+void Package::setDimensions(int diameter, int height){
+    dimensions->append(diameter);
+    dimensions->append(height);
+}
+
+void Package::setDimensions(int length, int breadth, int height){
+    dimensions->append(length);
+    dimensions->append(breadth);
+    dimensions->append(height);
+}
+
 

@@ -2,25 +2,27 @@
 #include <QChar>
 
 Box::Box(){
-    length = 0.0f;
-    breadth = 0.0f;
-    height = 0.0f;
+    length = 0;
+    breadth = 0;
+    height = 0;
     container_type = 'B';
 }
 
 Box::Box(Box &other){
     length = other.length;
     breadth = other.breadth;
-    height = other.breadth;
+    height = other.height;
     container_type = 'B';
 }
 
-Box::Box(float length, float breadth, float height, float weight, int Id)
+Box::Box(int length, int breadth, int height, int weight, int Id)
     :Package(Id, weight){
     length = length;
     breadth = breadth;
-    height = breadth;
+    height = height;
     container_type = 'B';
+    this->setDimensions(length, breadth, height);
+    this->setVolume(this->getVolume());
 }
 
 Box::~Box(){
@@ -28,30 +30,34 @@ Box::~Box(){
 }
 
 
-const float Box::getLength(){
+const int Box::getLength(){
     return length;
 }
 
-const float Box::getBreadth(){
+const int Box::getBreadth(){
     return breadth;
 }
 
-const float Box::getHeight(){
+const int Box::getHeight(){
     return height;
 }
 
-float Box::setLength(float lengthobj){
+int Box::setLength(int lengthobj){
     length = lengthobj;
 }
 
-float Box::setBreadth(float breadthobj){
+int Box::setBreadth(int breadthobj){
     breadth = breadthobj;
 }
 
-float Box::setHeight(float heightobj){
+int Box::setHeight(int heightobj){
     height = heightobj;
 }
 
 const QChar Box::getConainerType(){
     return container_type;
+}
+
+float Box::getVolume(){
+    return length*breadth*height;
 }

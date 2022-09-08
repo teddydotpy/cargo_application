@@ -1,11 +1,11 @@
 #include "../headers/cylinder.h"
 
 #include <QChar>
-
+#include <math.h>
 
 Cylinder::Cylinder(){
-    diameter = 0.0f;
-    height = 0.0f;
+    diameter = 0;
+    height = 0;
     container_type = 'C';
 }
 
@@ -15,30 +15,31 @@ Cylinder::Cylinder(Cylinder &other){
     container_type = 'C';
 }
 
-Cylinder::Cylinder(float diameter, float height, float weight, int Id)
+Cylinder::Cylinder(int diameter, int height, int weight, int Id)
     :Package(Id, weight){
     diameter = diameter;
     height = height;
     container_type = 'C';
+    this->setDimensions(diameter, height);
 }
 
 Cylinder::~Cylinder(){
     //Not much to destroy yet :D
 }
 
-float Cylinder::getDiameter(){
+int Cylinder::getDiameter(){
     return diameter;
 }
 
-float Cylinder::getHeight(){
+int Cylinder::getHeight(){
     return height;
 }
 
-float Cylinder::setDiameter(float Diameter){
+int Cylinder::setDiameter(int Diameter){
     diameter = Diameter;
 }
 
-float Cylinder::setHeight(float heightob){
+int Cylinder::setHeight(int heightob){
     height = heightob;
 }
 
@@ -46,3 +47,6 @@ QChar Cylinder::getContainerType(){
     return container_type;
 }
 
+float Cylinder::getVolume(){
+    return M_PI*pow(diameter*0.5, 2)*height;
+}

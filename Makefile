@@ -337,6 +337,7 @@ DIST          = /usr/local/share/qt/mkspecs/features/spec_pre.prf \
 		/usr/local/share/qt/mkspecs/features/qt_config.prf \
 		/usr/local/share/qt/mkspecs/macx-clang/qmake.conf \
 		/usr/local/share/qt/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/usr/local/share/qt/mkspecs/features/exclusive_builds.prf \
 		/usr/local/share/qt/mkspecs/features/mac/sdk.prf \
 		/usr/local/share/qt/mkspecs/features/toolchain.prf \
@@ -400,7 +401,7 @@ TARGET        = Cargo\ App
 EXPORT_QMAKE_MAC_SDK = macosx
 EXPORT_QMAKE_MAC_SDK_VERSION = 12.1
 EXPORT_QMAKE_XCODE_DEVELOPER_PATH = /Library/Developer/CommandLineTools
-EXPORT__QMAKE_STASH_ = 
+EXPORT__QMAKE_STASH_ = /Users/osidon/Docs/Container/container/.qmake.stash
 EXPORT_VALID_ARCHS = x86_64
 EXPORT_DEFAULT_ARCHS = x86_64
 EXPORT_ARCHS = $(filter $(EXPORT_VALID_ARCHS), $(if $(ARCHS), $(ARCHS), $(if $(EXPORT_DEFAULT_ARCHS), $(EXPORT_DEFAULT_ARCHS), $(EXPORT_VALID_ARCHS))))
@@ -659,6 +660,7 @@ Makefile: container.pro /usr/local/share/qt/mkspecs/macx-clang/qmake.conf /usr/l
 		/usr/local/share/qt/mkspecs/features/qt_config.prf \
 		/usr/local/share/qt/mkspecs/macx-clang/qmake.conf \
 		/usr/local/share/qt/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/usr/local/share/qt/mkspecs/features/exclusive_builds.prf \
 		/usr/local/share/qt/mkspecs/features/mac/sdk.prf \
 		/usr/local/share/qt/mkspecs/features/toolchain.prf \
@@ -938,6 +940,7 @@ Makefile: container.pro /usr/local/share/qt/mkspecs/macx-clang/qmake.conf /usr/l
 /usr/local/share/qt/mkspecs/features/qt_config.prf:
 /usr/local/share/qt/mkspecs/macx-clang/qmake.conf:
 /usr/local/share/qt/mkspecs/features/spec_post.prf:
+.qmake.stash:
 /usr/local/share/qt/mkspecs/features/exclusive_builds.prf:
 /usr/local/share/qt/mkspecs/features/mac/sdk.prf:
 /usr/local/share/qt/mkspecs/features/toolchain.prf:
@@ -998,6 +1001,7 @@ clean: compiler_clean
 
 distclean: clean 
 	-$(DEL_FILE) $(TARGET) 
+	-$(DEL_FILE) .qmake.stash
 	-$(DEL_FILE) Makefile
 
 
@@ -1074,6 +1078,16 @@ moc_mainclient.cpp: headers/mainclient.h \
 moc_post_xml.cpp: headers/post_xml.h \
 		/usr/local/lib/QtWidgets.framework/Headers/QWidget \
 		/usr/local/lib/QtWidgets.framework/Headers/qwidget.h \
+		headers/package.h \
+		/usr/local/lib/QtCore.framework/Headers/QString \
+		/usr/local/lib/QtCore.framework/Headers/qstring.h \
+		/usr/local/lib/QtCore.framework/Headers/QJsonDocument \
+		/usr/local/lib/QtCore.framework/Headers/qjsondocument.h \
+		/usr/local/lib/QtCore.framework/Headers/QList \
+		/usr/local/lib/QtCore.framework/Headers/qlist.h \
+		headers/allocated_packages.h \
+		/usr/local/lib/QtCore.framework/Headers/QMap \
+		/usr/local/lib/QtCore.framework/Headers/qmap.h \
 		moc_predefs.h \
 		/usr/local/share/qt/libexec/moc
 	/usr/local/share/qt/libexec/moc $(DEFINES) --include /Users/osidon/Docs/Container/container/moc_predefs.h -I/usr/local/share/qt/mkspecs/macx-clang -I/Users/osidon/Docs/Container/container -I/Users/osidon/Docs/Container/container -I/usr/local/lib/QtWidgets.framework/Headers -I/usr/local/lib/QtGui.framework/Headers -I/usr/local/lib/QtConcurrent.framework/Headers -I/usr/local/lib/QtNetwork.framework/Headers -I/usr/local/lib/QtXml.framework/Headers -I/usr/local/lib/QtCore.framework/Headers -I/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/13.0.0/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include -I/Library/Developer/CommandLineTools/usr/include -F/usr/local/lib headers/post_xml.h -o moc_post_xml.cpp
@@ -1119,6 +1133,8 @@ main.o: main.cpp /usr/local/lib/QtWidgets.framework/Headers/QApplication \
 allocated_packages.o: src/allocated_packages.cpp headers/allocated_packages.h \
 		/usr/local/lib/QtCore.framework/Headers/QMap \
 		/usr/local/lib/QtCore.framework/Headers/qmap.h \
+		/usr/local/lib/QtCore.framework/Headers/QList \
+		/usr/local/lib/QtCore.framework/Headers/qlist.h \
 		headers/package.h \
 		/usr/local/lib/QtCore.framework/Headers/QString \
 		/usr/local/lib/QtCore.framework/Headers/qstring.h \
@@ -1155,6 +1171,8 @@ box.o: src/box.cpp headers/box.h \
 		/usr/local/lib/QtCore.framework/Headers/qstring.h \
 		/usr/local/lib/QtCore.framework/Headers/QJsonDocument \
 		/usr/local/lib/QtCore.framework/Headers/qjsondocument.h \
+		/usr/local/lib/QtCore.framework/Headers/QList \
+		/usr/local/lib/QtCore.framework/Headers/qlist.h \
 		/usr/local/lib/QtCore.framework/Headers/QChar \
 		/usr/local/lib/QtCore.framework/Headers/qchar.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o box.o src/box.cpp
@@ -1203,6 +1221,8 @@ cylinder.o: src/cylinder.cpp headers/cylinder.h \
 		/usr/local/lib/QtCore.framework/Headers/qstring.h \
 		/usr/local/lib/QtCore.framework/Headers/QJsonDocument \
 		/usr/local/lib/QtCore.framework/Headers/qjsondocument.h \
+		/usr/local/lib/QtCore.framework/Headers/QList \
+		/usr/local/lib/QtCore.framework/Headers/qlist.h \
 		/usr/local/lib/QtCore.framework/Headers/QChar \
 		/usr/local/lib/QtCore.framework/Headers/qchar.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o cylinder.o src/cylinder.cpp
@@ -1288,6 +1308,8 @@ package.o: src/package.cpp headers/package.h \
 		/usr/local/lib/QtCore.framework/Headers/qstring.h \
 		/usr/local/lib/QtCore.framework/Headers/QJsonDocument \
 		/usr/local/lib/QtCore.framework/Headers/qjsondocument.h \
+		/usr/local/lib/QtCore.framework/Headers/QList \
+		/usr/local/lib/QtCore.framework/Headers/qlist.h \
 		/usr/local/lib/QtCore.framework/Headers/QChar \
 		/usr/local/lib/QtCore.framework/Headers/qchar.h \
 		/usr/local/lib/QtCore.framework/Headers/QDateTime \
@@ -1297,14 +1319,16 @@ package.o: src/package.cpp headers/package.h \
 post_xml.o: src/post_xml.cpp headers/post_xml.h \
 		/usr/local/lib/QtWidgets.framework/Headers/QWidget \
 		/usr/local/lib/QtWidgets.framework/Headers/qwidget.h \
-		headers/allocated_packages.h \
-		/usr/local/lib/QtCore.framework/Headers/QMap \
-		/usr/local/lib/QtCore.framework/Headers/qmap.h \
 		headers/package.h \
 		/usr/local/lib/QtCore.framework/Headers/QString \
 		/usr/local/lib/QtCore.framework/Headers/qstring.h \
 		/usr/local/lib/QtCore.framework/Headers/QJsonDocument \
 		/usr/local/lib/QtCore.framework/Headers/qjsondocument.h \
+		/usr/local/lib/QtCore.framework/Headers/QList \
+		/usr/local/lib/QtCore.framework/Headers/qlist.h \
+		headers/allocated_packages.h \
+		/usr/local/lib/QtCore.framework/Headers/QMap \
+		/usr/local/lib/QtCore.framework/Headers/qmap.h \
 		/usr/local/lib/QtWidgets.framework/Headers/QPushButton \
 		/usr/local/lib/QtWidgets.framework/Headers/qpushbutton.h \
 		/usr/local/lib/QtWidgets.framework/Headers/QVBoxLayout \

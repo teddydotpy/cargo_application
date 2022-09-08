@@ -2,7 +2,7 @@
 #define CYLINDER_VIEW_H
 #include <QGroupBox>
 
-class QDoubleSpinBox;
+class QSpinBox;
 class QLabel;
 class QPushButton;
 class QHBoxLayout;
@@ -16,15 +16,15 @@ class CylinderView: public QGroupBox{
 
         void setupMainWidget();
     signals:
-        void newContainer(float diameter, float height, float weight);
+        void newContainer(int diameter, int height, int weight);
 
     private slots:
         void clearBoxes();
 
     private:
-        QDoubleSpinBox *diameter; 
-        QDoubleSpinBox *height;
-        QDoubleSpinBox *weight;
+        QSpinBox *diameter; 
+        QSpinBox *height;
+        QSpinBox *weight;
 
         // Labels 
         QLabel *main_label;

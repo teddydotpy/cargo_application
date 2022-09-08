@@ -14,8 +14,8 @@ class UnallocatedList : public QList<Package*>{
         UnallocatedList(QList<Package*> *pList);
         ~UnallocatedList();
         void appendList(Package *container);
-        QString newPackage(float diameter, float height, float weight);
-        QString newPackage(float length, float breadth, float height, float weight);
+        QString newPackage(int diameter, int height, int weight);
+        QString newPackage(int length, int breadth, int height, int weight);
 
     private:
         int current_id;

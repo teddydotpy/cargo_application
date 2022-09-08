@@ -3,6 +3,7 @@
 
 #include <QString>
 #include <QJsonDocument>
+#include <QList>
 
 class Package{
         
@@ -16,20 +17,25 @@ class Package{
         float getVolume();
         int getWeight();
         int getId();
+        QList<int> *getDimensions();
         void setCode(QString code);
         void setPallete(int other_palette);
         void setVolume(float other_palette);
         void setWeight(int other_weight);
         void generatePackageCode(QChar packageType);
 
+        void setDimensions(int diameter, int height);
+        void setDimensions(int length, int breadth, int height);
+
     protected:
-        int volume;
+        float volume;
 
     private:
         QString package_code;
         int pallete;
         int weight, Id;
-        float volume;
+        QList<int> *dimensions;
+
 };
 
 #endif

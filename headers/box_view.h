@@ -2,7 +2,7 @@
 #define BOX_VIEW_H
 #include <QGroupBox>
 
-class QDoubleSpinBox;
+class QSpinBox;
 class QLabel;
 class QPushButton;
 class QHBoxLayout;
@@ -18,16 +18,16 @@ class BoxView: public QGroupBox{
         void setupMainWidget();
 
     signals:
-        void newContainer(float length, float breadth, float height, float weight);
+        void newContainer(int length, int breadth, int height, int weight);
 
     private slots:
         void clearBoxes();
 
     private:
-        QDoubleSpinBox *length; 
-        QDoubleSpinBox *breadth;
-        QDoubleSpinBox *height;
-        QDoubleSpinBox *weight;
+        QSpinBox *length; 
+        QSpinBox *breadth;
+        QSpinBox *height;
+        QSpinBox *weight;
 
         // Labels 
         QLabel *main_label;
