@@ -335,7 +335,6 @@ DIST          = /usr/local/share/qt/mkspecs/features/spec_pre.prf \
 		/usr/local/share/qt/mkspecs/features/qt_config.prf \
 		/usr/local/share/qt/mkspecs/macx-clang/qmake.conf \
 		/usr/local/share/qt/mkspecs/features/spec_post.prf \
-		.qmake.stash \
 		/usr/local/share/qt/mkspecs/features/exclusive_builds.prf \
 		/usr/local/share/qt/mkspecs/features/mac/sdk.prf \
 		/usr/local/share/qt/mkspecs/features/toolchain.prf \
@@ -397,7 +396,7 @@ TARGET        = Cargo\ App
 EXPORT_QMAKE_MAC_SDK = macosx
 EXPORT_QMAKE_MAC_SDK_VERSION = 12.1
 EXPORT_QMAKE_XCODE_DEVELOPER_PATH = /Library/Developer/CommandLineTools
-EXPORT__QMAKE_STASH_ = /Users/osidon/Docs/Container/container/.qmake.stash
+EXPORT__QMAKE_STASH_ = 
 EXPORT_VALID_ARCHS = x86_64
 EXPORT_DEFAULT_ARCHS = x86_64
 EXPORT_ARCHS = $(filter $(EXPORT_VALID_ARCHS), $(if $(ARCHS), $(ARCHS), $(if $(EXPORT_DEFAULT_ARCHS), $(EXPORT_DEFAULT_ARCHS), $(EXPORT_VALID_ARCHS))))
@@ -656,7 +655,6 @@ Makefile: container.pro /usr/local/share/qt/mkspecs/macx-clang/qmake.conf /usr/l
 		/usr/local/share/qt/mkspecs/features/qt_config.prf \
 		/usr/local/share/qt/mkspecs/macx-clang/qmake.conf \
 		/usr/local/share/qt/mkspecs/features/spec_post.prf \
-		.qmake.stash \
 		/usr/local/share/qt/mkspecs/features/exclusive_builds.prf \
 		/usr/local/share/qt/mkspecs/features/mac/sdk.prf \
 		/usr/local/share/qt/mkspecs/features/toolchain.prf \
@@ -936,7 +934,6 @@ Makefile: container.pro /usr/local/share/qt/mkspecs/macx-clang/qmake.conf /usr/l
 /usr/local/share/qt/mkspecs/features/qt_config.prf:
 /usr/local/share/qt/mkspecs/macx-clang/qmake.conf:
 /usr/local/share/qt/mkspecs/features/spec_post.prf:
-.qmake.stash:
 /usr/local/share/qt/mkspecs/features/exclusive_builds.prf:
 /usr/local/share/qt/mkspecs/features/mac/sdk.prf:
 /usr/local/share/qt/mkspecs/features/toolchain.prf:
@@ -997,7 +994,6 @@ clean: compiler_clean
 
 distclean: clean 
 	-$(DEL_FILE) $(TARGET) 
-	-$(DEL_FILE) .qmake.stash
 	-$(DEL_FILE) Makefile
 
 
@@ -1296,7 +1292,15 @@ mainclient.o: src/mainclient.cpp headers/mainclient.h \
 		/usr/local/lib/QtCore.framework/Headers/qfile.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainclient.o src/mainclient.cpp
 
-network_client.o: src/network_client.cpp 
+network_client.o: src/network_client.cpp headers/network_\ client.h \
+		/usr/local/lib/QtNetwork.framework/Headers/QTcpSocket \
+		/usr/local/lib/QtNetwork.framework/Headers/qtcpsocket.h \
+		/usr/local/lib/QtNetwork.framework/Headers/QHostAddress \
+		/usr/local/lib/QtNetwork.framework/Headers/qhostaddress.h \
+		/usr/local/lib/QtCore.framework/Headers/QString \
+		/usr/local/lib/QtCore.framework/Headers/qstring.h \
+		/usr/local/lib/QtCore.framework/Headers/QByteArray \
+		/usr/local/lib/QtCore.framework/Headers/qbytearray.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o network_client.o src/network_client.cpp
 
 package.o: src/package.cpp headers/package.h \
