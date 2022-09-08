@@ -77,13 +77,13 @@ void PostXmlWidget::sendXMl(){
 }
 
 void PostXmlWidget::SerializeXml(){
-    QString noPallets = QString::number(packages->count());
     QXmlStreamWriter *strema = new QXmlStreamWriter(xml_output);
     strema->setAutoFormatting(true);
     strema->writeStartDocument();
     strema->writeStartElement("Pallets");
-    strema->writeAttribute("NumberOfPallets", noPallets);
     if (packages != nullptr){
+        QString noPallets = QString::number(packages->count());
+        strema->writeAttribute("NumberOfPallets", noPallets);
         for(auto palette: packages->keys()){
             int palette_volume = 0, palette_weight = 0;
             strema->writeStartElement("Pallete");
@@ -115,10 +115,11 @@ void PostXmlWidget::SerializeXml(){
                     strema->writeEndElement();
                 }
                 
-            }
-
+            } 
             strema->writeEndElement();
         }
+    } else {
+        strema->writeAttribute("NumberOfPallets", 0);
     }
     strema->writeEndElement();
     strema->writeEndDocument();

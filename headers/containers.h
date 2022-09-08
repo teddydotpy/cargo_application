@@ -56,8 +56,8 @@ class ContainerWidget : public QWidget{
         };
 
     public slots:
-        void newPackage(float diameter, float height, float weight);
-        void newPackage(float length, float breadth, float height, float weight);
+        void newPackage(int diameter, int height, int weight);
+        void newPackage(int length, int breadth, int height, int weight);
         void paletteUpdate(QString code, int palletteNo, int pos);
 
     signals:

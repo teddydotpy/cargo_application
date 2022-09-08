@@ -65,8 +65,7 @@ SOURCES       = main.cpp \
 		src/package.cpp \
 		src/post_xml.cpp \
 		src/unallocated_list.cpp \
-		src/unallocated_view.cpp \
-		src/xml_serializer.cpp moc_box_view.cpp \
+		src/unallocated_view.cpp moc_box_view.cpp \
 		moc_containers.cpp \
 		moc_cylinder_view.cpp \
 		moc_mainclient.cpp \
@@ -86,7 +85,6 @@ OBJECTS       = main.o \
 		post_xml.o \
 		unallocated_list.o \
 		unallocated_view.o \
-		xml_serializer.o \
 		moc_box_view.o \
 		moc_containers.o \
 		moc_cylinder_view.o \
@@ -377,8 +375,7 @@ DIST          = /usr/local/share/qt/mkspecs/features/spec_pre.prf \
 		headers/package.h \
 		headers/post_xml.h \
 		headers/unallocated_list.h \
-		headers/unallocated_view.h \
-		headers/xml_serializer.h main.cpp \
+		headers/unallocated_view.h main.cpp \
 		src/allocated_packages.cpp \
 		src/backup.cpp \
 		src/box.cpp \
@@ -391,8 +388,7 @@ DIST          = /usr/local/share/qt/mkspecs/features/spec_pre.prf \
 		src/package.cpp \
 		src/post_xml.cpp \
 		src/unallocated_list.cpp \
-		src/unallocated_view.cpp \
-		src/xml_serializer.cpp
+		src/unallocated_view.cpp
 QMAKE_TARGET  = Cargo\ App
 DESTDIR       = 
 TARGET        = Cargo\ App
@@ -990,8 +986,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/local/share/qt/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents headers/allocated_packages.h headers/backup.h headers/box.h headers/box_view.h headers/containers.h headers/cylinder.h headers/cylinder_view.h headers/mainclient.h headers/network_\ client.h headers/package.h headers/post_xml.h headers/unallocated_list.h headers/unallocated_view.h headers/xml_serializer.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp src/allocated_packages.cpp src/backup.cpp src/box.cpp src/box_view.cpp src/containers.cpp src/cylinder.cpp src/cylinder_view.cpp src/mainclient.cpp src/network_client.cpp src/package.cpp src/post_xml.cpp src/unallocated_list.cpp src/unallocated_view.cpp src/xml_serializer.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents headers/allocated_packages.h headers/backup.h headers/box.h headers/box_view.h headers/containers.h headers/cylinder.h headers/cylinder_view.h headers/mainclient.h headers/network_\ client.h headers/package.h headers/post_xml.h headers/unallocated_list.h headers/unallocated_view.h $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp src/allocated_packages.cpp src/backup.cpp src/box.cpp src/box_view.cpp src/containers.cpp src/cylinder.cpp src/cylinder_view.cpp src/mainclient.cpp src/network_client.cpp src/package.cpp src/post_xml.cpp src/unallocated_list.cpp src/unallocated_view.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -1329,6 +1325,8 @@ post_xml.o: src/post_xml.cpp headers/post_xml.h \
 		headers/allocated_packages.h \
 		/usr/local/lib/QtCore.framework/Headers/QMap \
 		/usr/local/lib/QtCore.framework/Headers/qmap.h \
+		/usr/local/lib/QtCore.framework/Headers/QXmlStreamWriter \
+		/usr/local/lib/QtCore.framework/Headers/qxmlstream.h \
 		/usr/local/lib/QtWidgets.framework/Headers/QPushButton \
 		/usr/local/lib/QtWidgets.framework/Headers/qpushbutton.h \
 		/usr/local/lib/QtWidgets.framework/Headers/QVBoxLayout \
@@ -1377,9 +1375,6 @@ unallocated_view.o: src/unallocated_view.cpp headers/unallocated_view.h \
 		/usr/local/lib/QtCore.framework/Headers/QDebug \
 		/usr/local/lib/QtCore.framework/Headers/qdebug.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o unallocated_view.o src/unallocated_view.cpp
-
-xml_serializer.o: src/xml_serializer.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o xml_serializer.o src/xml_serializer.cpp
 
 moc_box_view.o: moc_box_view.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_box_view.o moc_box_view.cpp

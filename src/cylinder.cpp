@@ -21,6 +21,7 @@ Cylinder::Cylinder(int diameter, int height, int weight, int Id)
     height = height;
     container_type = 'C';
     this->setDimensions(diameter, height);
+    this->setVolume(this->getVolume());
 }
 
 Cylinder::~Cylinder(){
@@ -48,5 +49,6 @@ QChar Cylinder::getContainerType(){
 }
 
 float Cylinder::getVolume(){
-    return M_PI*pow(diameter*0.5, 2)*height;
+
+    return M_PI*pow(getDimensions()->at(0)/2, 2)*getDimensions()->at(1);
 }

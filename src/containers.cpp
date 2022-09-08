@@ -28,13 +28,13 @@ void ContainerWidget::setupViews(){
     emit sendAllocatedMap(allocateMap);
 }
 
-void ContainerWidget::newPackage(float diameter, float height, float weight){
+void ContainerWidget::newPackage(int diameter, int height, int weight){
     QString item = pkg_list->newPackage(diameter, height, weight);
     emit newContainer(item);
     emit updateStatus("New Cylinder added to unallocated items list:  " + item);
 }   
 
-void ContainerWidget::newPackage(float length, float breadth, float height, float weight){
+void ContainerWidget::newPackage(int length, int breadth, int height, int weight){
     QString item = pkg_list->newPackage(length, breadth, height, weight);
     emit newContainer(item);
     emit updateStatus("New Box added to unallocated items list:  " + item);

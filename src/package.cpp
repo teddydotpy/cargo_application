@@ -9,6 +9,7 @@ Package::Package(){
     package_code = "";
     pallete = 0;
     weight = 0;
+    volume = 0;
     dimensions = new QList<int>();
 }
 
@@ -17,6 +18,7 @@ Package::Package(const Package &other){
     pallete = other.pallete;
     weight = other.weight;
     package_code = "";
+    volume = 0;
     dimensions = new QList<int>();
 }
 
@@ -25,6 +27,7 @@ Package::Package(int Id_b, int weight_b){
     weight = weight_b;
     package_code = "";
     pallete = 0;
+    volume = 0;
     dimensions = new QList<int>();
 }
 

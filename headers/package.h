@@ -27,10 +27,8 @@ class Package{
         void setDimensions(int diameter, int height);
         void setDimensions(int length, int breadth, int height);
 
-    protected:
-        float volume;
-
     private:
+        float volume;
         QString package_code;
         int pallete;
         int weight, Id;

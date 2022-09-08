@@ -59,5 +59,5 @@ const QChar Box::getConainerType(){
 }
 
 float Box::getVolume(){
-    return length*breadth*height;
+    return getDimensions()->at(0) * getDimensions()->at(1) * getDimensions()->at(2);
 }
