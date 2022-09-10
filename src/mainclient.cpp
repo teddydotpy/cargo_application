@@ -41,9 +41,11 @@ MainClient::MainClient(QWidget *parent)
     connect(actHelp, &QAction::triggered, this, &MainClient::showHelp);
     connect(actExit, SIGNAL(triggered()), this, SLOT(closeWindow()));
     connect(contWidget, SIGNAL(updateStatus(QString)), this, SLOT(updateStatus(QString)));
+    connect(postXml, SIGNAL(updateStatus(QString)), this, SLOT(updateStatus(QString)));
+    connect(postXml, SIGNAL(deallocatePackage(Package*)), contWidget, SLOT(reallocate(Package*)));
 
     // Initialize window
-    setWindowTitle("Transport App");
+    setWindowTitle("Cargo App");
     setMinimumSize(1024, 550);
     statusBar()->showMessage("Ready...");
 }

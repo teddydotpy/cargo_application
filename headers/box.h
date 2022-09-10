@@ -11,12 +11,12 @@ class Box : public Package{
         Box(int length, int breadth, int height, int weight, int Id);
         ~Box();
 
-        const int getLength();
-        const int getBreadth();
-        const int getHeight();
-        int setLength(int length);
-        int setBreadth(int breadth);
-        int setHeight(int height);
+        int getLength();
+        int getBreadth();
+        int getHeight();
+        void setLength(int length);
+        void setBreadth(int breadth);
+        void setHeight(int height);
         const QChar getConainerType();
         float getVolume();
 

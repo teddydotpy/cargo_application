@@ -40,11 +40,17 @@ void ContainerWidget::newPackage(int length, int breadth, int height, int weight
     emit updateStatus("New Box added to unallocated items list:  " + item);
 }
 
-void ContainerWidget::paletteUpdate(QString code, int paletter, int pos){
+void ContainerWidget::paletteUpdate(int paletter, int pos){
     if (pkg_list->count() >= 1){
         pkg_list->at(pos)->setPallete(paletter);
         allocateMap->add_new(pkg_list->at(pos), paletter);
         pkg_list->removeAt(pos);
     }
     emit sendAllocatedMap(allocateMap);
+}
+
+void ContainerWidget::reallocate(Package *obj){
+    pkg_list->append(obj);
+    emit newContainer(obj->getCode());
+    emit updateStatus(obj->getCode() + " has ben de-allocated and returned to unallocated list." );
 }

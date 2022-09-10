@@ -13,8 +13,8 @@ class Cylinder : public Package{
 
         int getDiameter();
         int getHeight();
-        int setDiameter(int Diameter);
-        int setHeight(int height);
+        void setDiameter(int Diameter);
+        void setHeight(int height);
         QChar getContainerType();
         float getVolume();
 

@@ -67,11 +67,10 @@ void UncallocatedView::removeItem(){
     QList<QListWidgetItem*> selected = list_widget->selectedItems();
     QModelIndexList index = list_widget->selectionModel()->selectedIndexes();
     if (selected.length() == 1){
-        emit codeSelected(selected[0]->text(), paletter_spin->value(), index[0].row());
+        emit codeSelected(paletter_spin->value(), index[0].row());
         qDeleteAll(selected);
     } else {
         emit updateStatus("You should not select multiple things please.");
     }
-
 }
 

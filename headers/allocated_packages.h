@@ -10,6 +10,8 @@ class AllocatedMap : public QMap<int, QList<Package*>*>{
         AllocatedMap();
         ~AllocatedMap();
         void add_new(Package *container, int palette_id);
+        void deallocate(QString code);
+        Package *getPackage(QString code);
 
     signals:
         void newValue(Package *item);

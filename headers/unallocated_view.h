@@ -20,7 +20,7 @@ class UncallocatedView : public QGroupBox{
         void setupView();
         
     signals:
-        void codeSelected(QString code, int palletteNo, int pos);
+        void codeSelected(int palletteNo, int pos);
         void backup();
         void updateStatus(QString msg);
     

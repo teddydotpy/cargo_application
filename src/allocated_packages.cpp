@@ -22,3 +22,26 @@ void AllocatedMap::add_new(Package *container, int palette_id){
     }
 
 }
+
+void AllocatedMap::deallocate(QString code){
+    for(auto palette: this->keys()){
+        for(int i = 0; i < this->value(palette)->length(); i++){
+            if(this->value(palette)->at(i)->getCode() == code){
+                this->value(palette)->removeAt(i);
+            }
+        }
+    }
+}
+
+Package *AllocatedMap::getPackage(QString code){
+    Package *item = nullptr;
+    for(auto palette: this->keys()){
+        for(int i = 0; i < this->value(palette)->length(); i++){
+            if(this->value(palette)->at(i)->getCode() == code){
+                item = this->value(palette)->at(i);
+            }
+        }
+    }
+
+    return item;
+}

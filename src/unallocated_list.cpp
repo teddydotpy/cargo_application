@@ -13,6 +13,9 @@ UnallocatedList::UnallocatedList()
 UnallocatedList::~UnallocatedList(){
     delete container_c;
     delete container_b;
+    for(auto contents: *this){
+        delete contents;
+    }
 }
 
 void UnallocatedList::appendList(Package *pkg){

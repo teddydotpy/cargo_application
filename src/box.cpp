@@ -15,11 +15,11 @@ Box::Box(Box &other){
     container_type = 'B';
 }
 
-Box::Box(int length, int breadth, int height, int weight, int Id)
+Box::Box(int length_val, int breadth_val, int height_val, int weight, int Id)
     :Package(Id, weight){
-    length = length;
-    breadth = breadth;
-    height = height;
+    length = length_val;
+    breadth = breadth_val;
+    height = height_val;
     container_type = 'B';
     this->setDimensions(length, breadth, height);
     this->setVolume(this->getVolume());
@@ -30,27 +30,27 @@ Box::~Box(){
 }
 
 
-const int Box::getLength(){
+int Box::getLength(){
     return length;
 }
 
-const int Box::getBreadth(){
+int Box::getBreadth(){
     return breadth;
 }
 
-const int Box::getHeight(){
+int Box::getHeight(){
     return height;
 }
 
-int Box::setLength(int lengthobj){
+void Box::setLength(int lengthobj){
     length = lengthobj;
 }
 
-int Box::setBreadth(int breadthobj){
+void Box::setBreadth(int breadthobj){
     breadth = breadthobj;
 }
 
-int Box::setHeight(int heightobj){
+void Box::setHeight(int heightobj){
     height = heightobj;
 }
 

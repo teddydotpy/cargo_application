@@ -15,10 +15,10 @@ Cylinder::Cylinder(Cylinder &other){
     container_type = 'C';
 }
 
-Cylinder::Cylinder(int diameter, int height, int weight, int Id)
+Cylinder::Cylinder(int diameter_val, int height_val, int weight, int Id)
     :Package(Id, weight){
-    diameter = diameter;
-    height = height;
+    diameter = diameter_val;
+    height = height_val;
     container_type = 'C';
     this->setDimensions(diameter, height);
     this->setVolume(this->getVolume());
@@ -36,11 +36,11 @@ int Cylinder::getHeight(){
     return height;
 }
 
-int Cylinder::setDiameter(int Diameter){
+void Cylinder::setDiameter(int Diameter){
     diameter = Diameter;
 }
 
-int Cylinder::setHeight(int heightob){
+void Cylinder::setHeight(int heightob){
     height = heightob;
 }
 

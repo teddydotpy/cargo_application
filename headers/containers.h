@@ -32,7 +32,7 @@ class ContainerWidget : public QWidget{
                 connect(box, SIGNAL(newContainer(int, int, int, int)), this, SLOT(newPackage(int, int, int, int)));
                 connect(cylinder, SIGNAL(newContainer(int, int, int)), this, SLOT(newPackage(int, int, int)));
                 connect(this, SIGNAL(newContainer(QString)), code_list, SLOT(update(QString)));
-                connect(code_list, SIGNAL(codeSelected(QString, int, int)), this, SLOT(paletteUpdate(QString, int, int)));
+                connect(code_list, SIGNAL(codeSelected(int, int)), this, SLOT(paletteUpdate(int, int)));
             };
 
         QVBoxLayout *main_layout;
@@ -58,7 +58,8 @@ class ContainerWidget : public QWidget{
     public slots:
         void newPackage(int diameter, int height, int weight);
         void newPackage(int length, int breadth, int height, int weight);
-        void paletteUpdate(QString code, int palletteNo, int pos);
+        void reallocate(Package *obj);
+        void paletteUpdate(int palletteNo, int pos);
 
     signals:
         void newContainer(QString item);

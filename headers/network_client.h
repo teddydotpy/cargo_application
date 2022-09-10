@@ -1,5 +1,5 @@
 #ifndef NETWORKCLIENT_H
-#define NETOWRKCLIENT_H
+#define NETWORKCLIENT_H
 #include <QTcpSocket>
 
 class QString;
@@ -11,11 +11,10 @@ class NetworkClient: public QTcpSocket{
         NetworkClient(QObject *parent = nullptr);
         ~NetworkClient();
 
-        void connect(quint16 port);
+        void connect();
         void connect(QString &hostName, quint16 port);
         void connect(QHostAddress &hostAddress, quint16 port);
-        void close();
-        bool write(QString data);
+        bool writeToServer(QString data);
 
     private:
         bool connected;

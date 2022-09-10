@@ -1,4 +1,4 @@
-#include "../headers/network_ client.h"
+#include "../headers/network_client.h"
 
 #include <QTcpSocket>
 #include <QHostAddress>
@@ -9,17 +9,16 @@ static inline QByteArray IntToArray(qint32 source);
 
 NetworkClient::NetworkClient(QObject *parent)
     :QTcpSocket(parent){
-
     connected = false;
 }
 
 NetworkClient::~NetworkClient(){
-
+    this->close();
 }
 
-void NetworkClient::connect(quint16 port){
-    QHostAddress home = QHostAddress("12.0.0.1");
-    this->connectToHost(home, port);
+void NetworkClient::connect(){
+    QHostAddress home = QHostAddress("127.0.0.1");
+    this->connectToHost(home, 3682);
     connected = this->waitForConnected(60000);
 }
 
@@ -33,11 +32,7 @@ void NetworkClient::connect(QHostAddress &hostAddress, quint16 port){
     connected = this->waitForConnected(60000);
 }
 
-void NetworkClient::close(){
-    this->close();
-}
-
-bool NetworkClient::write(QString data){
+bool NetworkClient::writeToServer(QString data){
     QByteArray byte_data = data.toUtf8();
     if (this->state() == QAbstractSocket::ConnectedState){
         this->write(IntToArray(byte_data.size())); //write size of data
