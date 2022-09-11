@@ -15,6 +15,7 @@ class QString;
 class QLabel;
 class QListWidget;
 class NetworkClient;
+class QMutex;
 class PostXmlWidget : public QWidget{
         Q_OBJECT
         /* I genuinely tried to be consistent with my naming conventions but oowowowowo */
@@ -36,6 +37,7 @@ class PostXmlWidget : public QWidget{
         QLabel *top_label, *bottom_label;
         QString *xml_output, *to_be_posted;
         NetworkClient *sendSocket;
+        QMutex *mute_x;
 
         void setupView();
 
@@ -52,6 +54,7 @@ class PostXmlWidget : public QWidget{
         void handleNoData();
         void handleNewAllocated();
         void handleEmptyList();
+        void SerializeXml();
 
     signals:
         void unallocatePackage(Package *cont, int pos);
@@ -60,7 +63,7 @@ class PostXmlWidget : public QWidget{
         void deallocatePackage(Package *obj);
 
     public slots:
-        void SerializeXml();
+        void threadedSerialization();
         void recieveAllocatedPackages(AllocatedMap *map);
         void updateXml();
         void handleDeallocation();

@@ -4,6 +4,9 @@
 
 #include <QXmlStreamWriter>
 #include <QtConcurrent>
+#include <QFuture>
+#include <QMutex>
+#include <QMutexLocker>
 #include <QMessageBox>
 #include <QPushButton>
 #include <QVBoxLayout>
@@ -24,6 +27,7 @@ PostXmlWidget::~PostXmlWidget(){
 void PostXmlWidget::setupView(){
 
     packages = nullptr;
+    mute_x = new QMutex();
     sendSocket = new NetworkClient();
     sendSocket->connect();
     xml_output = new QString();
@@ -67,13 +71,14 @@ void PostXmlWidget::setupView(){
     main_layout->addLayout(bottom_layout);
 
     connect(post_b, SIGNAL(clicked()), this, SLOT(sendXMl()));
-    connect(serialize, SIGNAL(clicked()), this, SLOT(SerializeXml()));
+    connect(serialize, SIGNAL(clicked()), this, SLOT(threadedSerialization()));
     connect(deallocate, SIGNAL(clicked()), this, SLOT(handleDeallocation()));
     connect(connect_button, SIGNAL(clicked()), this, SLOT(connectToServer()));
     connect(this, SIGNAL(updateXmlViewer()), this, SLOT(updateXml()));
 }
 
 void PostXmlWidget::updateXml(){
+    QMutexLocker lock(mute_x);
     *to_be_posted = *xml_output;
     xml_view->clear();
     xml_view->setText(*xml_output);
@@ -196,4 +201,8 @@ void PostXmlWidget::handleNewAllocated(){
 
 void PostXmlWidget::connectToServer(){
     sendSocket->connect();
+}
+
+void PostXmlWidget::threadedSerialization(){
+    QFuture<void> future = QtConcurrent::run(&PostXmlWidget::SerializeXml, this);
 }

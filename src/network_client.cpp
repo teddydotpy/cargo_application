@@ -18,7 +18,7 @@ NetworkClient::~NetworkClient(){
 
 void NetworkClient::connect(){
     QHostAddress home = QHostAddress("127.0.0.1");
-    this->connectToHost(home, 3682);
+    this->connectToHost(home, 6164);
     connected = this->waitForConnected(60000);
 }
 
